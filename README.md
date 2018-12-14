@@ -96,4 +96,4 @@ module "core" {
 
 ## License
 
-Apache2.0 Licensed. See [LICENSE](https://github.com/lean-delivery/tf-module-awscore/tree/master/LICENSE) for full details.
+Apache2.0 Licensed. See [LICENSE](https://github.com/lean-delivery/tf-module-aws-core/tree/master/LICENSE) for full details.
