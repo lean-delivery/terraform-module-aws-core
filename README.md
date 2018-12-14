@@ -1,3 +1,8 @@
+## Summary
+
+Terraform module to setup AWS VPC with required parameters.
+Based on Hashicorp's [VPC module](https://github.com/terraform-aws-modules/terraform-aws-vpc).
+
 ## Usage example
 ```
 module "core" {
