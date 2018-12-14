@@ -1,10 +1,11 @@
-## Summary
+# Summary
 
 Terraform module to setup AWS VPC with required parameters.
 Based on Hashicorp's [VPC module](https://github.com/terraform-aws-modules/terraform-aws-vpc).
 
 ## Usage example
-```
+
+```HCL
 module "core" {
   source = "github.com/lean-delivery/tf-module-awscore"
 
