@@ -64,3 +64,19 @@ variable "tags" {
   default     = {}
   description = "Additional tags for resources"
 }
+
+variable "region" {
+  description = "AWS Region"
+  default     = ""
+}
+
+variable "amis" {
+  type        = "map"
+  default     = {}
+  description = "A map of AZs with AMIs ({<az> = <ami>})"
+}
+
+variable "instance_type" {
+  description = "The type of instance to start"
+  default     = "t3.nano"
+}

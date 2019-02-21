@@ -47,3 +47,33 @@ resource "aws_default_security_group" "assign-name" {
 
   tags = "${merge(local.default_tags, var.tags, map("Name", "${var.project}-${var.environment}"))}"
 }
+
+resource "aws_eip" "nat" {
+  count     = "${ var.enable_nat_gateway ? 0 : length(var.availability_zones) }"
+  instance  = "${element(aws_instance.nat.*.id, count.index)}"
+  vpc       = true
+}
+
+resource "aws_instance" "nat" {
+  count = "${ var.enable_nat_gateway ? 0 : length(var.availability_zones) }"
+  
+  ami                     = "${lookup(var.amis, var.region)}"
+  instance_type           = "${var.instance_type}"
+  availability_zone       = "${element(var.availability_zones, count.index)}"
+  vpc_security_group_ids  = ["${aws_default_security_group.assign-name.id}"]
+  subnet_id               = "${element(module.vpc.public_subnets, count.index)}"
+  
+  tags = "${merge(local.default_tags, var.tags)}"
+}
+
+resource "aws_route" "private_nat_ec2" {
+  count = "${ var.enable_nat_gateway ? 0 : length(var.availability_zones) }"
+
+  route_table_id          = "${element(module.vpc.private_route_table_ids, count.index)}"
+  destination_cidr_block  = "0.0.0.0/0"
+  instance_id             = "${element(aws_instance.nat.*.id, count.index)}"
+
+  timeouts {
+    create = "5m"
+  }
+}
