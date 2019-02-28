@@ -65,11 +65,6 @@ variable "tags" {
   description = "Additional tags for resources"
 }
 
-variable "region" {
-  description = "AWS Region"
-  default     = ""
-}
-
 variable "nat_as_ec2_instance" {
   description = "Setup NAT as EC2 instance instead of service"
   default     = "false"

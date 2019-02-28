@@ -1,11 +1,3 @@
-variable "amis" {
-  type = "map"
-
-  default = {
-    us-west-2 = "ami-79eca201"
-  }
-}
-
 variable "region" {
   default = "us-west-2"
 }
@@ -34,7 +26,6 @@ module "test-ec2-nat" {
   single_nat_gateway  = "true"
   nat_as_ec2_instance = "true"
 
-  region        = "${var.region}"
   instance_type = "${var.instance_type}"
 }
 
