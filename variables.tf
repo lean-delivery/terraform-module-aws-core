@@ -70,10 +70,9 @@ variable "region" {
   default     = ""
 }
 
-variable "amis" {
-  type        = "map"
-  default     = {}
-  description = "A map of AZs with AMIs ({<az> = <ami>})"
+variable "nat_as_ec2_instance" {
+  description = "Setup NAT as EC2 instance instead of service"
+  default     = "false"
 }
 
 variable "instance_type" {

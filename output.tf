@@ -297,3 +297,8 @@ output "nat_ec2_ids" {
   description = "List of NAT instance IDs"
   value       = "${aws_instance.nat.*.id}"
 }
+
+output "ec2_nat_ami" {
+  description = "EC2 AMI used for NAT instances"
+  value       = "${ var.nat_as_ec2_instance ? data.aws_ami.nat.id : "" }"
+}

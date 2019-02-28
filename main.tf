@@ -3,6 +3,8 @@ locals {
     Project     = "${var.project}"
     Environment = "${var.environment}"
   }
+
+  ec2_nat_count = "${ var.single_nat_gateway ? 1 : length(var.availability_zones) }"
 }
 
 resource "aws_route53_zone" "main" {
@@ -10,6 +12,33 @@ resource "aws_route53_zone" "main" {
   name  = "${var.root_domain}"
 
   tags = "${merge(local.default_tags, var.tags)}"
+}
+
+data "aws_ami" "nat" {
+  # executable_users = ["self"]
+  most_recent = true
+  owners      = ["amazon"]
+
+  # https://docs.aws.amazon.com/vpc/latest/userguide/VPC_NAT_Instance.html
+  filter {
+    name   = "name"
+    values = ["amzn-ami-vpc-nat-*"]
+  }
+
+  filter {
+    name   = "state"
+    values = ["available"]
+  }
+
+  filter {
+    name   = "root-device-type"
+    values = ["ebs"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
 }
 
 module "vpc" {
@@ -21,9 +50,9 @@ module "vpc" {
   private_subnets = "${var.private_subnets}"
   public_subnets  = "${var.public_subnets}"
 
-  enable_nat_gateway      = "${var.enable_nat_gateway}"      //true
+  enable_nat_gateway      = "${ var.enable_nat_gateway ? "${ var.nat_as_ec2_instance ? "false" : "true" }" : "false" }"
   single_nat_gateway      = "${var.single_nat_gateway}"
-  map_public_ip_on_launch = "${var.map_public_ip_on_launch}" // true by default
+  map_public_ip_on_launch = "${var.map_public_ip_on_launch}"                                                            // true by default
 
   tags = "${merge(local.default_tags, var.tags)}"
 }
@@ -49,29 +78,29 @@ resource "aws_default_security_group" "assign-name" {
 }
 
 resource "aws_eip" "nat" {
-  count     = "${ var.enable_nat_gateway ? 0 : length(var.availability_zones) }"
-  instance  = "${element(aws_instance.nat.*.id, count.index)}"
-  vpc       = true
+  count    = "${ var.enable_nat_gateway && var.nat_as_ec2_instance ? local.ec2_nat_count : 0 }"
+  instance = "${element(aws_instance.nat.*.id, count.index)}"
+  vpc      = true
 }
 
 resource "aws_instance" "nat" {
-  count = "${ var.enable_nat_gateway ? 0 : length(var.availability_zones) }"
-  
-  ami                     = "${lookup(var.amis, var.region)}"
-  instance_type           = "${var.instance_type}"
-  availability_zone       = "${element(var.availability_zones, count.index)}"
-  vpc_security_group_ids  = ["${aws_default_security_group.assign-name.id}"]
-  subnet_id               = "${element(module.vpc.public_subnets, count.index)}"
-  
+  count = "${ var.enable_nat_gateway && var.nat_as_ec2_instance ? local.ec2_nat_count : 0 }"
+
+  ami                    = "${data.aws_ami.nat.id}"
+  instance_type          = "${var.instance_type}"
+  availability_zone      = "${element(var.availability_zones, count.index)}"
+  vpc_security_group_ids = ["${aws_default_security_group.assign-name.id}"]
+  subnet_id              = "${element(module.vpc.public_subnets, count.index)}"
+
   tags = "${merge(local.default_tags, var.tags)}"
 }
 
 resource "aws_route" "private_nat_ec2" {
-  count = "${ var.enable_nat_gateway ? 0 : length(var.availability_zones) }"
+  count = "${ var.enable_nat_gateway && var.nat_as_ec2_instance ? local.ec2_nat_count : 0 }"
 
-  route_table_id          = "${element(module.vpc.private_route_table_ids, count.index)}"
-  destination_cidr_block  = "0.0.0.0/0"
-  instance_id             = "${element(aws_instance.nat.*.id, count.index)}"
+  route_table_id         = "${element(module.vpc.private_route_table_ids, count.index)}"
+  destination_cidr_block = "0.0.0.0/0"
+  instance_id            = "${element(aws_instance.nat.*.id, count.index)}"
 
   timeouts {
     create = "5m"
