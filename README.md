@@ -25,17 +25,19 @@ module "core" {
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | availability\_zones | A list of availability zones in the region | list | `<list>` | no |
-| create\_route53\_zone | Switch to create Route53 zone | string | `false` | no |
-| enable\_nat\_gateway | Should be true if you want to provision NAT Gateways for each of your private networks | string | `false` | no |
-| environment | Environment name is used to identify resources | string | `env` | no |
-| map\_public\_ip\_on\_launch | Should be false if you do not want to auto-assign public IP on launch | string | `true` | no |
+| create\_route53\_zone | Switch to create Route53 zone | string | `"false"` | no |
+| enable\_nat\_gateway | Should be true if you want to provision NAT Gateways for each of your private networks | string | `"false"` | no |
+| environment | Environment name is used to identify resources | string | `"env"` | no |
+| instance\_type | The type of instance to start | string | `"t3.nano"` | no |
+| map\_public\_ip\_on\_launch | Should be false if you do not want to auto-assign public IP on launch | string | `"true"` | no |
+| nat\_as\_ec2\_instance | Setup NAT as EC2 instance instead of service | string | `"false"` | no |
 | private\_subnets | A list of private subnets inside the VPC | list | `<list>` | no |
-| project | Project name is used to identify resources | string | `project` | no |
+| project | Project name is used to identify resources | string | `"project"` | no |
 | public\_subnets | A list of public subnets inside the VPC | list | `<list>` | no |
-| root\_domain | Name of Route53 zone (if 'create_route53_zone' = True) | string | `` | no |
-| single\_nat\_gateway | Should be true if you want to provision a single shared NAT Gateway across all of your private networks | string | `false` | no |
+| root\_domain | Name of Route53 zone (if 'create_route53_zone' = True) | string | `""` | no |
+| single\_nat\_gateway | Should be true if you want to provision a single shared NAT Gateway across all of your private networks | string | `"false"` | no |
 | tags | Additional tags for resources | map | `<map>` | no |
-| vpc\_cidr | The CIDR block for the VPC. Default value is a valid CIDR, but not acceptable by AWS and should be overridden | string | `0.0.0.0/16` | no |
+| vpc\_cidr | The CIDR block for the VPC. Default value is a valid CIDR, but not acceptable by AWS and should be overridden | string | `"0.0.0.0/16"` | no |
 
 ## Outputs
 
@@ -57,6 +59,7 @@ module "core" {
 | default\_vpc\_id | The ID of the VPC |
 | default\_vpc\_instance\_tenancy | Tenancy of instances spin up within VPC |
 | default\_vpc\_main\_route\_table\_id | The ID of the main route table associated with this VPC |
+| ec2\_nat\_ami | EC2 AMI used for NAT instances |
 | elasticache\_route\_table\_ids | List of IDs of elasticache route tables |
 | elasticache\_subnet\_group | ID of elasticache subnet group |
 | elasticache\_subnet\_group\_name | Name of elasticache subnet group |
@@ -67,6 +70,7 @@ module "core" {
 | intra\_route\_table\_ids | List of IDs of intra route tables |
 | intra\_subnets | List of IDs of intra subnets |
 | intra\_subnets\_cidr\_blocks | List of cidr_blocks of intra subnets |
+| nat\_ec2\_ids | List of NAT instance IDs |
 | nat\_ids | List of allocation ID of Elastic IPs created for AWS NAT Gateway |
 | nat\_public\_ips | List of public Elastic IPs created for AWS NAT Gateway |
 | natgw\_ids | List of NAT Gateway IDs |
