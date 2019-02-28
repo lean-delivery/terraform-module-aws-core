@@ -292,3 +292,8 @@ output "route53_zone_id" {
   description = "The ID of created Route53 zone."
   value       = "${element(concat(aws_route53_zone.main.*.zone_id, list("")), 0)}"
 }
+
+output "nat_ec2_ids" {
+  description = "List of NAT instance IDs"
+  value       = "${aws_instance.nat.*.id}"
+}
