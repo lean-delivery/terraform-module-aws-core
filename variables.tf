@@ -64,3 +64,13 @@ variable "tags" {
   default     = {}
   description = "Additional tags for resources"
 }
+
+variable "nat_as_ec2_instance" {
+  description = "Setup NAT as EC2 instance instead of service"
+  default     = "false"
+}
+
+variable "instance_type" {
+  description = "The type of instance to start"
+  default     = "t3.nano"
+}
