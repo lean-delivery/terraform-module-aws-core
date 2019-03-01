@@ -99,7 +99,7 @@ resource "aws_instance" "nat" {
     # volume_size           = 100
     delete_on_termination = true
 
-    encrypted = false
+    encrypted = true
   }
 
   tags = "${merge(local.default_tags, var.tags, map("Name", "${var.project}-${var.environment}-${count.index}"))}"
