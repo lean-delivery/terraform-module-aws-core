@@ -1,11 +1,34 @@
-# Summary
+# AWS Core module
+[![License](https://img.shields.io/badge/license-Apache-green.svg?style=flat)](https://raw.githubusercontent.com/lean-delivery/tf-module-aws-core/master/LICENSE)
+[![Build Status](https://travis-ci.org/lean-delivery/tf-module-aws-core.svg?branch=master)](https://travis-ci.org/lean-delivery/tf-module-aws-core)
+
+## Description
 
 Terraform module to setup AWS VPC with required parameters.
 Based on Hashicorp's [VPC module](https://github.com/terraform-aws-modules/terraform-aws-vpc).
 
-## Usage example
+These types of resources are supported:
 
-```HCL
+* [VPC](https://www.terraform.io/docs/providers/aws/r/vpc.html)
+* [Subnet](https://www.terraform.io/docs/providers/aws/r/subnet.html)
+* [Route](https://www.terraform.io/docs/providers/aws/r/route.html)
+* [Route table](https://www.terraform.io/docs/providers/aws/r/route_table.html)
+* [Internet Gateway](https://www.terraform.io/docs/providers/aws/r/internet_gateway.html)
+* [NAT Gateway](https://www.terraform.io/docs/providers/aws/r/nat_gateway.html)
+* [VPN Gateway](https://www.terraform.io/docs/providers/aws/r/vpn_gateway.html)
+* [VPC Endpoint](https://www.terraform.io/docs/providers/aws/r/vpc_endpoint.html):
+  * Gateway: S3, DynamoDB
+  * Interface: EC2, SSM, EC2 Messages, SSM Messages, ECR API, ECR DKR, API Gateway
+* [RDS DB Subnet Group](https://www.terraform.io/docs/providers/aws/r/db_subnet_group.html)
+* [ElastiCache Subnet Group](https://www.terraform.io/docs/providers/aws/r/elasticache_subnet_group.html)
+* [Redshift Subnet Group](https://www.terraform.io/docs/providers/aws/r/redshift_subnet_group.html)
+* [DHCP Options Set](https://www.terraform.io/docs/providers/aws/r/vpc_dhcp_options.html)
+* [Default VPC](https://www.terraform.io/docs/providers/aws/r/default_vpc.html)
+
+## Usage
+
+### Conditional creation
+```
 module "core" {
   source = "github.com/lean-delivery/tf-module-awscore"
 
@@ -19,6 +42,14 @@ module "core" {
   enable_nat_gateway = "true"
 }
 ```
+### Known issues / Limitations
+
+### Code included in this module
+
+### Examples
+* [Simple VPC](https://github.com/lean-delivery/tf-module-aws-core/tree/master/examples/simple)
+* [EC2 as custom NAT](https://github.com/lean-delivery/tf-module-aws-core/tree/master/examples/ec2-as-nat)
+
 
 ## Inputs
 
@@ -99,6 +130,17 @@ module "core" {
 | vpc\_main\_route\_table\_id | The ID of the main route table associated with this VPC |
 | vpc\_secondary\_cidr\_blocks | List of secondary CIDR blocks of the VPC |
 
+## Tests
+
+## Terraform versions
+Terraform version 0.11.11 or newer is required for this module to work.
+
+## Contributing
+Thank you for your interest in contributing! Please refer to [CONTRIBUTING.md](https://github.com/lean-delivery/tf-module-aws-core/blob/master/CONTRIBUTING.md) for guidance.
+
 ## License
 
 Apache2.0 Licensed. See [LICENSE](https://github.com/lean-delivery/tf-module-aws-core/tree/master/LICENSE) for full details.
+
+## Authors
+Lean Delivery Team <team@lean-delivery.com>
