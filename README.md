@@ -7,6 +7,24 @@
 Terraform module to setup AWS VPC with required parameters.
 Based on Hashicorp's [VPC module](https://github.com/terraform-aws-modules/terraform-aws-vpc).
 
+These types of resources are supported:
+
+* [VPC](https://www.terraform.io/docs/providers/aws/r/vpc.html)
+* [Subnet](https://www.terraform.io/docs/providers/aws/r/subnet.html)
+* [Route](https://www.terraform.io/docs/providers/aws/r/route.html)
+* [Route table](https://www.terraform.io/docs/providers/aws/r/route_table.html)
+* [Internet Gateway](https://www.terraform.io/docs/providers/aws/r/internet_gateway.html)
+* [NAT Gateway](https://www.terraform.io/docs/providers/aws/r/nat_gateway.html)
+* [VPN Gateway](https://www.terraform.io/docs/providers/aws/r/vpn_gateway.html)
+* [VPC Endpoint](https://www.terraform.io/docs/providers/aws/r/vpc_endpoint.html):
+  * Gateway: S3, DynamoDB
+  * Interface: EC2, SSM, EC2 Messages, SSM Messages, ECR API, ECR DKR, API Gateway
+* [RDS DB Subnet Group](https://www.terraform.io/docs/providers/aws/r/db_subnet_group.html)
+* [ElastiCache Subnet Group](https://www.terraform.io/docs/providers/aws/r/elasticache_subnet_group.html)
+* [Redshift Subnet Group](https://www.terraform.io/docs/providers/aws/r/redshift_subnet_group.html)
+* [DHCP Options Set](https://www.terraform.io/docs/providers/aws/r/vpc_dhcp_options.html)
+* [Default VPC](https://www.terraform.io/docs/providers/aws/r/default_vpc.html)
+
 # Usage
 ```
 module "core" {
@@ -22,14 +40,11 @@ module "core" {
   enable_nat_gateway = "true"
 }
 ```
-## Conditional creation
-
-## Known issues / Limitations
-
-## Code included in this module
 
 ## Examples
-See examples folder
+* [Simple VPC](https://github.com/lean-delivery/tf-module-aws-core/tree/master/examples/simple)
+* [EC2 as custom NAT](https://github.com/lean-delivery/tf-module-aws-core/tree/master/examples/ec2-as-nat)
+
 
 # Inputs
 
@@ -110,12 +125,23 @@ See examples folder
 | vpc\_main\_route\_table\_id | The ID of the main route table associated with this VPC |
 | vpc\_secondary\_cidr\_blocks | List of secondary CIDR blocks of the VPC |
 
-# Tests
-
 # Terraform versions
-v0.11.11
+Terraform version 0.11.11 or newer is required for this module to work.
 
 # Contributing
+Please use the [issue tracker](https://github.com/lean-delivery/tf-module-aws-core/issues) to report any bugs or file feature requests.
+
+In general, PRs are welcome. We follow the typical "fork-and-pull" Git workflow.
+
+ 1. **Fork** the repo on GitHub
+ 2. **Clone** the project to your own machine
+ 3. **Commit** changes to your own branch
+ 4. **Push** your work back up to your fork
+ 5. Submit a **Pull Request** so that we can review your changes
+
+**NOTE:** Be sure to merge the latest changes from "upstream" before making a pull request!
+
+Please See CONTRIBUTING.md for information on contributing.
 
 # License
 
