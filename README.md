@@ -129,19 +129,7 @@ module "core" {
 Terraform version 0.11.11 or newer is required for this module to work.
 
 # Contributing
-Please use the [issue tracker](https://github.com/lean-delivery/tf-module-aws-core/issues) to report any bugs or file feature requests.
-
-In general, PRs are welcome. We follow the typical "fork-and-pull" Git workflow.
-
- 1. **Fork** the repo on GitHub
- 2. **Clone** the project to your own machine
- 3. **Commit** changes to your own branch
- 4. **Push** your work back up to your fork
- 5. Submit a **Pull Request** so that we can review your changes
-
-**NOTE:** Be sure to merge the latest changes from "upstream" before making a pull request!
-
-Please See CONTRIBUTING.md for information on contributing.
+Thank you for your interest in contributing! Please refer to [CONTRIBUTING.md](https://github.com/lean-delivery/tf-module-aws-core/blob/master/CONTRIBUTING.md) for guidance.
 
 # License
 
