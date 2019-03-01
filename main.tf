@@ -91,11 +91,15 @@ resource "aws_instance" "nat" {
   availability_zone      = "${element(var.availability_zones, count.index)}"
   vpc_security_group_ids = ["${aws_default_security_group.assign-name.id}"]
   subnet_id              = "${element(module.vpc.public_subnets, count.index)}"
+
   ebs_block_device {
-    device_name           = "/dev/ebs1"
+    device_name = "/dev/ebs1"
+
     # volume_type           = "gp2"
     # volume_size           = 100
     delete_on_termination = true
+
+    encrypted = false
   }
 
   tags = "${merge(local.default_tags, var.tags, map("Name", "${var.project}-${var.environment}-${count.index}"))}"
