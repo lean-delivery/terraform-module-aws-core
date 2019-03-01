@@ -13,7 +13,7 @@ provider "aws" {
 data "aws_availability_zones" "available" {}
 
 module "test-ec2-nat" {
-  source = "../"
+  source = "../../"
 
   project            = "module-test"
   environment        = "ec2-nat"
