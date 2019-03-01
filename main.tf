@@ -91,7 +91,7 @@ resource "aws_instance" "nat" {
   availability_zone      = "${element(var.availability_zones, count.index)}"
   vpc_security_group_ids = ["${aws_default_security_group.assign-name.id}"]
   subnet_id              = "${element(module.vpc.public_subnets, count.index)}"
-  ebs_block_device       = ""
+  ebs_block_device {}
 
   tags = "${merge(local.default_tags, var.tags, map("Name", "${var.project}-${var.environment}-${count.index}"))}"
 }
