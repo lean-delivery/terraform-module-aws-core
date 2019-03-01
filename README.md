@@ -41,6 +41,12 @@ module "core" {
 }
 ```
 
+### Conditional creation
+
+### Known issues / Limitations
+
+### Code included in this module
+
 ### Examples
 * [Simple VPC](https://github.com/lean-delivery/tf-module-aws-core/tree/master/examples/simple)
 * [EC2 as custom NAT](https://github.com/lean-delivery/tf-module-aws-core/tree/master/examples/ec2-as-nat)
@@ -124,6 +130,8 @@ module "core" {
 | vpc\_instance\_tenancy | Tenancy of instances spin up within VPC |
 | vpc\_main\_route\_table\_id | The ID of the main route table associated with this VPC |
 | vpc\_secondary\_cidr\_blocks | List of secondary CIDR blocks of the VPC |
+
+## Tests
 
 ## Terraform versions
 Terraform version 0.11.11 or newer is required for this module to work.

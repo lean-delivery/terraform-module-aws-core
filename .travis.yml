@@ -42,6 +42,8 @@ script:
   - echo 'Running cred-alert'
   - cred-alert scan -f .
   - echo 'Running tfling'
+  - echo 'Download Terraform modules'
+  - terraform get
   - docker run --rm -v $(pwd):/app/ --workdir=/app/ -t wata727/tflint --error-with-issues
   - echo 'Running terrascan'
   - docker run --rm -v $(pwd):/work/ --workdir=/work/ -t tmknom/terrascan --location . --test all
