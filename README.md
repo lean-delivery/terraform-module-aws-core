@@ -2,7 +2,7 @@
 [![License](https://img.shields.io/badge/license-Apache-green.svg?style=flat)](https://raw.githubusercontent.com/lean-delivery/tf-module-aws-core/master/LICENSE)
 [![Build Status](https://travis-ci.org/lean-delivery/tf-module-aws-core.svg?branch=master)](https://travis-ci.org/lean-delivery/tf-module-aws-core)
 
-# Description
+## Description
 
 Terraform module to setup AWS VPC with required parameters.
 Based on Hashicorp's [VPC module](https://github.com/terraform-aws-modules/terraform-aws-vpc).
@@ -25,7 +25,7 @@ These types of resources are supported:
 * [DHCP Options Set](https://www.terraform.io/docs/providers/aws/r/vpc_dhcp_options.html)
 * [Default VPC](https://www.terraform.io/docs/providers/aws/r/default_vpc.html)
 
-# Usage
+## Usage
 ```
 module "core" {
   source = "github.com/lean-delivery/tf-module-awscore"
@@ -41,12 +41,12 @@ module "core" {
 }
 ```
 
-## Examples
+### Examples
 * [Simple VPC](https://github.com/lean-delivery/tf-module-aws-core/tree/master/examples/simple)
 * [EC2 as custom NAT](https://github.com/lean-delivery/tf-module-aws-core/tree/master/examples/ec2-as-nat)
 
 
-# Inputs
+## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
@@ -65,7 +65,7 @@ module "core" {
 | tags | Additional tags for resources | map | `<map>` | no |
 | vpc\_cidr | The CIDR block for the VPC. Default value is a valid CIDR, but not acceptable by AWS and should be overridden | string | `"0.0.0.0/16"` | no |
 
-# Outputs
+## Outputs
 
 | Name | Description |
 |------|-------------|
@@ -125,15 +125,15 @@ module "core" {
 | vpc\_main\_route\_table\_id | The ID of the main route table associated with this VPC |
 | vpc\_secondary\_cidr\_blocks | List of secondary CIDR blocks of the VPC |
 
-# Terraform versions
+## Terraform versions
 Terraform version 0.11.11 or newer is required for this module to work.
 
-# Contributing
+## Contributing
 Thank you for your interest in contributing! Please refer to [CONTRIBUTING.md](https://github.com/lean-delivery/tf-module-aws-core/blob/master/CONTRIBUTING.md) for guidance.
 
-# License
+## License
 
 Apache2.0 Licensed. See [LICENSE](https://github.com/lean-delivery/tf-module-aws-core/tree/master/LICENSE) for full details.
 
-# Authors
+## Authors
 Lean Delivery Team <team@lean-delivery.com>

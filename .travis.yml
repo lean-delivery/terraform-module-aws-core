@@ -36,7 +36,7 @@ script:
   - echo 'Running terraform fmt'
   - terraform fmt -check=true
   - echo 'Running terraform validate'
-  - terraform validate
+  - terraform validate -check-variables=false
   - echo 'Running readme validator'
   - tf_readme_validator.py
   - echo 'Running cred-alert'
