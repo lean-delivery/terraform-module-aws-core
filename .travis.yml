@@ -42,6 +42,6 @@ script:
   - echo 'Running cred-alert'
   - cred-alert scan -f .
   - echo 'Running tfling'
-  - docker run --rm -v $(pwd):/app/ --workdir=/app/ -t wata727/tflint --error-with-issues --ignore-module="terraform-aws-modules/vpc/aws" --quiet
+  - docker run --rm -v $(pwd):/app/ --workdir=/app/ -t wata727/tflint --error-with-issues --ignore-module="terraform-aws-modules/vpc/aws"
   - echo 'Running terrascan'
   - docker run --rm -v $(pwd):/work/ --workdir=/work/ -t tmknom/terrascan --location . --test all
