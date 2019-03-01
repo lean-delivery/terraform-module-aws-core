@@ -26,6 +26,8 @@ These types of resources are supported:
 * [Default VPC](https://www.terraform.io/docs/providers/aws/r/default_vpc.html)
 
 ## Usage
+
+### Conditional creation
 ```
 module "core" {
   source = "github.com/lean-delivery/tf-module-awscore"
@@ -40,9 +42,6 @@ module "core" {
   enable_nat_gateway = "true"
 }
 ```
-
-### Conditional creation
-
 ### Known issues / Limitations
 
 ### Code included in this module
