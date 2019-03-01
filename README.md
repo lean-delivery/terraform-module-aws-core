@@ -1,9 +1,21 @@
-# Summary
+# AWS Core module
+[![License](https://img.shields.io/badge/license-Apache-green.svg?style=flat)](https://raw.githubusercontent.com/lean-delivery/tf-module-aws-core/master/LICENSE)
+[![Build Status](https://travis-ci.org/lean-delivery/tf-module-aws-core.svg?branch=master)](https://travis-ci.org/lean-delivery/tf-module-aws-core)
+
+# Description
 
 Terraform module to setup AWS VPC with required parameters.
 Based on Hashicorp's [VPC module](https://github.com/terraform-aws-modules/terraform-aws-vpc).
 
-## Usage example
+# Usage
+
+## Conditional creation
+
+## Known issues / Limitations
+
+## Code included in this module
+
+## Examples
 
 ```HCL
 module "core" {
@@ -20,7 +32,7 @@ module "core" {
 }
 ```
 
-## Inputs
+# Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
@@ -39,7 +51,7 @@ module "core" {
 | tags | Additional tags for resources | map | `<map>` | no |
 | vpc\_cidr | The CIDR block for the VPC. Default value is a valid CIDR, but not acceptable by AWS and should be overridden | string | `"0.0.0.0/16"` | no |
 
-## Outputs
+# Outputs
 
 | Name | Description |
 |------|-------------|
@@ -99,6 +111,17 @@ module "core" {
 | vpc\_main\_route\_table\_id | The ID of the main route table associated with this VPC |
 | vpc\_secondary\_cidr\_blocks | List of secondary CIDR blocks of the VPC |
 
-## License
+# Tests
+
+# Terraform versions
+v0.11.11
+
+# Contributing
+
+# License
 
 Apache2.0 Licensed. See [LICENSE](https://github.com/lean-delivery/tf-module-aws-core/tree/master/LICENSE) for full details.
+
+# Authors
+
+authors: Lean Delivery Team
