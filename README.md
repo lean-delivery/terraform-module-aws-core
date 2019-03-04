@@ -1,4 +1,5 @@
 # AWS Core module
+
 [![License](https://img.shields.io/badge/license-Apache-green.svg?style=flat)](https://raw.githubusercontent.com/lean-delivery/tf-module-aws-core/master/LICENSE)
 [![Build Status](https://travis-ci.org/lean-delivery/tf-module-aws-core.svg?branch=master)](https://travis-ci.org/lean-delivery/tf-module-aws-core)
 
@@ -28,6 +29,7 @@ These types of resources are supported:
 ## Usage
 
 ### Conditional creation
+
 ```
 module "core" {
   source = "github.com/lean-delivery/tf-module-awscore"
@@ -42,11 +44,9 @@ module "core" {
   enable_nat_gateway = "true"
 }
 ```
-### Known issues / Limitations
-
-### Code included in this module
 
 ### Examples
+
 * [Simple VPC](https://github.com/lean-delivery/tf-module-aws-core/tree/master/examples/simple)
 * [EC2 as custom NAT](https://github.com/lean-delivery/tf-module-aws-core/tree/master/examples/ec2-as-nat)
 
@@ -130,12 +130,12 @@ module "core" {
 | vpc\_main\_route\_table\_id | The ID of the main route table associated with this VPC |
 | vpc\_secondary\_cidr\_blocks | List of secondary CIDR blocks of the VPC |
 
-## Tests
-
 ## Terraform versions
+
 Terraform version 0.11.11 or newer is required for this module to work.
 
 ## Contributing
+
 Thank you for your interest in contributing! Please refer to [CONTRIBUTING.md](https://github.com/lean-delivery/tf-module-aws-core/blob/master/CONTRIBUTING.md) for guidance.
 
 ## License
@@ -143,4 +143,5 @@ Thank you for your interest in contributing! Please refer to [CONTRIBUTING.md](h
 Apache2.0 Licensed. See [LICENSE](https://github.com/lean-delivery/tf-module-aws-core/tree/master/LICENSE) for full details.
 
 ## Authors
+
 Lean Delivery Team <team@lean-delivery.com>
