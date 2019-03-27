@@ -57,6 +57,8 @@ module "core" {
 |------|-------------|:----:|:-----:|:-----:|
 | availability\_zones | A list of availability zones in the region | list | `<list>` | no |
 | create\_route53\_zone | Switch to create Route53 zone | string | `"false"` | no |
+| enable\_dns\_hostnames | Should be true to enable DNS hostnames in the VPC | string | `"false"` | no |
+| enable\_dns\_support | Should be true to enable DNS support in the VPC | string | `"true"` | no |
 | enable\_nat\_gateway | Should be true if you want to provision NAT Gateways for each of your private networks | string | `"false"` | no |
 | environment | Environment name is used to identify resources | string | `"env"` | no |
 | instance\_type | The type of instance to start | string | `"t3.nano"` | no |
