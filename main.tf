@@ -54,6 +54,9 @@ module "vpc" {
   single_nat_gateway      = "${var.single_nat_gateway}"
   map_public_ip_on_launch = "${var.map_public_ip_on_launch}"                                                            // true by default
 
+  enable_dns_support   = "${var.enable_dns_support}"
+  enable_dns_hostnames = "${var.enable_dns_hostnames}"
+
   tags = "${merge(local.default_tags, var.tags)}"
 }
 
