@@ -85,10 +85,6 @@ variable "enable_dns_hostnames" {
   default     = "false"
 }
 
-variable "public_key_path" {
-  default     = "/root/.ssh/id_rsa.pub"
-}
-
 variable "key_name" {
-  default     = "EpamNatInstance_Key"
+  default     = ""
 }

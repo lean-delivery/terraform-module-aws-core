@@ -86,18 +86,13 @@ resource "aws_eip" "nat" {
   vpc      = true
 }
 
-resource "aws_key_pair" "tf_auth" {
-  key_name   = "${var.key_name}"
-  public_key = "${file(var.public_key_path)}"
-}
-
 resource "aws_instance" "nat" {
   count = "${ var.enable_nat_gateway && var.nat_as_ec2_instance ? local.ec2_nat_count : 0 }"
 
   ami                    = "${data.aws_ami.nat.id}"
   instance_type          = "${var.instance_type}"
   availability_zone      = "${element(var.availability_zones, count.index)}"
-  key_name               = "${aws_key_pair.tf_auth.id}"
+  key_name               = "${var.key_name}"
   source_dest_check      = false
   vpc_security_group_ids = ["${aws_default_security_group.assign-name.id}"]
   subnet_id              = "${element(module.vpc.public_subnets, count.index)}"
