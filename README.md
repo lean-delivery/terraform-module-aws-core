@@ -71,6 +71,7 @@ module "core" {
 | single\_nat\_gateway | Should be true if you want to provision a single shared NAT Gateway across all of your private networks | string | `"false"` | no |
 | tags | Additional tags for resources | map | `<map>` | no |
 | vpc\_cidr | The CIDR block for the VPC. Default value is a valid CIDR, but not acceptable by AWS and should be overridden | string | `"0.0.0.0/16"` | no |
+| key\_name | The Key Name that we use for Generate Key | string | `""` | no |
 
 ## Outputs
 
