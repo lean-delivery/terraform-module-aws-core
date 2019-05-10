@@ -31,11 +31,6 @@ data "aws_ami" "nat" {
   }
 
   filter {
-    name   = "root-device-type"
-    values = ["ebs"]
-  }
-
-  filter {
     name   = "virtualization-type"
     values = ["hvm"]
   }
