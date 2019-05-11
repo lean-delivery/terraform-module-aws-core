@@ -10,8 +10,7 @@ locals {
 resource "aws_route53_zone" "main" {
   count = "${ var.create_route53_zone ? 1 : 0 }"
   name  = "${var.root_domain}"
-
-  tags = "${merge(local.default_tags, var.tags)}"
+  tags  = "${merge(local.default_tags, var.tags)}"
 }
 
 data "aws_ami" "nat" {
@@ -91,9 +90,7 @@ resource "aws_instance" "nat" {
   source_dest_check      = false
   vpc_security_group_ids = ["${aws_default_security_group.assign-name.id}"]
   subnet_id              = "${element(module.vpc.public_subnets, count.index)}"
-
-
-  tags = "${merge(local.default_tags, var.tags, map("Name", "${var.project}-${var.environment}-${count.index}"))}"
+  tags                   = "${merge(local.default_tags, var.tags, map("Name", "${var.project}-${var.environment}-${count.index}"))}"
 }
 
 resource "aws_route" "private_nat_ec2" {

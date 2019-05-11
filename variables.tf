@@ -86,5 +86,5 @@ variable "enable_dns_hostnames" {
 }
 
 variable "key_name" {
-  default     = ""
+  default = ""
 }
