@@ -42,7 +42,8 @@ data "aws_ami" "nat" {
 }
 
 module "vpc" {
-  source = "terraform-aws-modules/vpc/aws"
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "1.66.0"
 
   name            = "${var.project}-${var.environment}"
   azs             = "${var.availability_zones}"
