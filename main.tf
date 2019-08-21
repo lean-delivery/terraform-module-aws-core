@@ -51,6 +51,13 @@ module "vpc" {
   private_subnets = "${var.private_subnets}"
   public_subnets  = "${var.public_subnets}"
 
+  database_subnets       = "${var.database_subnets}"
+  database_subnet_tags   = "${var.database_subnet_tags}"
+  database_subnet_suffix = "${var.database_subnet_suffix}"
+
+  create_database_subnet_group = "${var.create_database_subnet_group}"
+  database_subnet_group_tags   = "${var.database_subnet_group_tags}"
+
   enable_nat_gateway      = "${ var.enable_nat_gateway ? "${ var.nat_as_ec2_instance ? "false" : "true" }" : "false" }"
   single_nat_gateway      = "${var.single_nat_gateway}"
   map_public_ip_on_launch = "${var.map_public_ip_on_launch}"                                                            // true by default

@@ -84,3 +84,28 @@ variable "enable_dns_hostnames" {
   description = "Should be true to enable DNS hostnames in the VPC"
   default     = "false"
 }
+
+variable "database_subnets" {
+  description = "A list of database subnets"
+  default     = []
+}
+
+variable "database_subnet_tags" {
+  description = "Additional tags for the database subnets"
+  default     = {}
+}
+
+variable "database_subnet_suffix" {
+  description = "Suffix to append to database subnets name"
+  default     = "db"
+}
+
+variable "create_database_subnet_group" {
+  description = "Controls if database subnet group should be created"
+  default     = true
+}
+
+variable "database_subnet_group_tags" {
+  description = "Additional tags for the database subnet group"
+  default     = {}
+}
