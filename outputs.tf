@@ -302,3 +302,18 @@ output "ec2_nat_ami" {
   description = "EC2 AMI used for NAT instances"
   value       = "${ var.nat_as_ec2_instance ? data.aws_ami.nat.id : "" }"
 }
+
+output "private_network_acl_id" {
+  description = "Dedicaited ACL ID for private network"
+  value       = "${module.vpc.private_network_acl_id}"
+}
+
+output "public_network_acl_id" {
+  description = "Dedicaited ACL ID for public network"
+  value       = "${module.vpc.public_network_acl_id}"
+}
+
+output "database_network_acl_id" {
+  description = "Dedicaited ACL ID for database network"
+  value       = "${module.vpc.database_network_acl_id}"
+}

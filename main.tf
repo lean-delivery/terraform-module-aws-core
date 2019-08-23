@@ -65,6 +65,19 @@ module "vpc" {
   enable_dns_support   = "${var.enable_dns_support}"
   enable_dns_hostnames = "${var.enable_dns_hostnames}"
 
+  public_dedicated_network_acl   = "${var.public_dedicated_network_acl}"
+  private_dedicated_network_acl  = "${var.private_dedicated_network_acl}"
+  database_dedicated_network_acl = "${var.database_dedicated_network_acl}"
+
+  public_inbound_acl_rules  = "${var.public_inbound_acl_rules}"
+  public_outbound_acl_rules = "${var.public_outbound_acl_rules}"
+
+  private_inbound_acl_rules  = "${var.private_inbound_acl_rules}"
+  private_outbound_acl_rules = "${var.private_outbound_acl_rules}"
+
+  database_inbound_acl_rules  = "${var.database_inbound_acl_rules}"
+  database_outbound_acl_rules = "${var.database_outbound_acl_rules}"
+
   tags = "${merge(local.default_tags, var.tags)}"
 }
 
