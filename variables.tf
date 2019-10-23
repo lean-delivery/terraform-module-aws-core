@@ -49,6 +49,15 @@ variable "enable_nat_gateway" {
   description = "Should be true if you want to provision NAT Gateways for each of your private networks"
 }
 
+variable "enable_vpn_gateway" {
+  default     = "false"
+  description = "Should be true if you want to create and attach virtual private gateway for your vpc"
+}
+
+variable "amazon_side_asn" {
+  default     = "64512"
+  description = "The Autonomous System Number (ASN) for the Amazon side of the gateway. By default the virtual private gateway is created with the current default Amazon ASN."
+}
 variable "single_nat_gateway" {
   default     = "false"
   description = "Should be true if you want to provision a single shared NAT Gateway across all of your private networks"

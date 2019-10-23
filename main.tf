@@ -59,6 +59,8 @@ module "vpc" {
   database_subnet_group_tags   = "${var.database_subnet_group_tags}"
 
   enable_nat_gateway      = "${ var.enable_nat_gateway ? "${ var.nat_as_ec2_instance ? "false" : "true" }" : "false" }"
+  enable_vpn_gateway      = "${ var.enable_vpn_gateway }"
+  amazon_side_asn         = "${ var.amazon_side_asn }"
   single_nat_gateway      = "${var.single_nat_gateway}"
   map_public_ip_on_launch = "${var.map_public_ip_on_launch}"                                                            // true by default
 
