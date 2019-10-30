@@ -83,7 +83,7 @@ module "vpc" {
   tags = merge(local.default_tags, var.tags)
 }
 
-resource "aws_default_security_group" "assign-name" {
+resource "aws_default_security_group" "this" {
   vpc_id = module.vpc.vpc_id
 
   ingress {
