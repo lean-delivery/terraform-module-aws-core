@@ -121,7 +121,7 @@ resource "aws_instance" "nat" {
   ami                    = data.aws_ami.nat.id
   instance_type          = var.instance_type
   availability_zone      = element(var.availability_zones, count.index)
-  vpc_security_group_ids = [aws_default_security_group.assign-name.id]
+  vpc_security_group_ids = [aws_default_security_group.this.id]
   subnet_id              = element(module.vpc.public_subnets, count.index)
 
   # ebs_block_device {
