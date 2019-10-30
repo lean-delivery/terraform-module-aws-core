@@ -4,25 +4,25 @@ variable "create_route53_zone" {
 }
 
 variable "root_domain" {
-  type        = "string"
+  type        = string
   default     = ""
   description = "Name of Route53 zone (if 'create_route53_zone' = True)"
 }
 
 variable "project" {
-  type        = "string"
+  type        = string
   default     = "project"
   description = "Project name is used to identify resources"
 }
 
 variable "environment" {
-  type        = "string"
+  type        = string
   default     = "env"
   description = "Environment name is used to identify resources"
 }
 
 variable "availability_zones" {
-  type        = "list"
+  type        = list(string)
   default     = []
   description = "A list of availability zones in the region"
 }
@@ -33,13 +33,13 @@ variable "vpc_cidr" {
 }
 
 variable "private_subnets" {
-  type        = "list"
+  type        = list(string)
   default     = []
   description = "A list of private subnets inside the VPC"
 }
 
 variable "public_subnets" {
-  type        = "list"
+  type        = list(string)
   default     = []
   description = "A list of public subnets inside the VPC"
 }
@@ -58,6 +58,7 @@ variable "amazon_side_asn" {
   default     = "64512"
   description = "The Autonomous System Number (ASN) for the Amazon side of the gateway. By default the virtual private gateway is created with the current default Amazon ASN."
 }
+
 variable "single_nat_gateway" {
   default     = "false"
   description = "Should be true if you want to provision a single shared NAT Gateway across all of your private networks"
@@ -69,7 +70,7 @@ variable "map_public_ip_on_launch" {
 }
 
 variable "tags" {
-  type        = "map"
+  type        = map(string)
   default     = {}
   description = "Additional tags for resources"
 }
@@ -223,3 +224,4 @@ variable "database_outbound_acl_rules" {
     },
   ]
 }
+
