@@ -12,7 +12,7 @@ script:
   - export AWS_REGION='us-east-1'
   - docker run --rm -v $(pwd):/work/ --workdir=/work/ -t leandelivery/docker-terraform-ci:tf-12-support terraform init
   - docker run --rm -v $(pwd):/work/ --workdir=/work/ -t leandelivery/docker-terraform-ci:tf-12-support terraform fmt -check=true
-  - docker run --rm -v $(pwd):/work/ --workdir=/work/ -t leandelivery/docker-terraform-ci:tf-12-support terraform validate
+  - docker run --rm -v $(pwd):/work/ --workdir=/work/ -e AWS_REGION='us-east-1' -t leandelivery/docker-terraform-ci:tf-12-support terraform validate
   # - docker run --rm -v $(pwd):/work/ --workdir=/work/ -t leandelivery/docker-terraform-ci:tf-12-support tf_readme_validator.py // should be replaced with https://github.com/hashicorp/terraform-config-inspect
   - docker run --rm -v $(pwd):/work/ --workdir=/work/ -t leandelivery/docker-terraform-ci:tf-12-support cred-alert scan -f .
   - docker run --rm -v $(pwd):/work/ --workdir=/work/ -t leandelivery/docker-terraform-ci:tf-12-support tflint -c .tflint.hcl
