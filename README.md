@@ -28,8 +28,6 @@ These types of resources are supported:
 
 ## Usage
 
-### Conditional creation
-
 ```
 module "core" {
   source = "github.com/lean-delivery/tf-module-awscore"
@@ -45,6 +43,20 @@ module "core" {
 }
 ```
 
+### Conditional creation
+
+Sometimes you need to have a way to create VPC resources conditionally but Terraform does not allow to use `count` inside `module` block, so the solution is to specify argument `create_vpc`.
+
+```
+# This VPC will not be created
+module "core" {
+  source = "github.com/lean-delivery/tf-module-awscore"
+
+  create_vpc = false
+  # ... omitted
+}
+```
+
 ### Examples
 
 * [Simple VPC](https://github.com/lean-delivery/tf-module-aws-core/tree/master/examples/simple)
@@ -57,6 +69,7 @@ module "core" {
 |------|-------------|:----:|:-----:|:-----:|
 | availability\_zones | A list of availability zones in the region | list | `<list>` | no |
 | create\_route53\_zone | Switch to create Route53 zone | string | `"false"` | no |
+| create\_vpc | Controls if VPC should be created (it affects almost all resources) | bool | `"true"` | no |
 | enable\_dns\_hostnames | Should be true to enable DNS hostnames in the VPC | string | `"false"` | no |
 | enable\_dns\_support | Should be true to enable DNS support in the VPC | string | `"true"` | no |
 | enable\_nat\_gateway | Should be true if you want to provision NAT Gateways for each of your private networks | string | `"false"` | no |

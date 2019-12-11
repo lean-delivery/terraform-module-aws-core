@@ -8,7 +8,7 @@ locals {
 }
 
 resource "aws_route53_zone" "main" {
-  count = var.create_route53_zone ? 1 : 0
+  count = var.create_vpc && var.create_route53_zone ? 1 : 0
   name  = var.root_domain
 
   tags = merge(local.default_tags, var.tags)
@@ -44,6 +44,8 @@ data "aws_ami" "nat" {
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "2.17.0"
+
+  create_vpc = var.create_vpc
 
   name            = "${var.project}-${var.environment}"
   azs             = var.availability_zones
@@ -84,6 +86,8 @@ module "vpc" {
 }
 
 resource "aws_default_security_group" "this" {
+  count = var.create_vpc ? 1 : 0
+
   vpc_id = module.vpc.vpc_id
 
   ingress {
@@ -110,18 +114,18 @@ resource "aws_default_security_group" "this" {
 }
 
 resource "aws_eip" "nat" {
-  count    = var.enable_nat_gateway && var.nat_as_ec2_instance ? local.ec2_nat_count : 0
+  count    = var.create_vpc && var.enable_nat_gateway && var.nat_as_ec2_instance ? local.ec2_nat_count : 0
   instance = element(aws_instance.nat.*.id, count.index)
   vpc      = true
 }
 
 resource "aws_instance" "nat" {
-  count = var.enable_nat_gateway && var.nat_as_ec2_instance ? local.ec2_nat_count : 0
+  count = var.create_vpc && var.enable_nat_gateway && var.nat_as_ec2_instance ? local.ec2_nat_count : 0
 
   ami                    = data.aws_ami.nat.id
   instance_type          = var.instance_type
   availability_zone      = element(var.availability_zones, count.index)
-  vpc_security_group_ids = [aws_default_security_group.this.id]
+  vpc_security_group_ids = [aws_default_security_group.this[count.index].id]
   subnet_id              = element(module.vpc.public_subnets, count.index)
 
   # ebs_block_device {
@@ -145,7 +149,7 @@ resource "aws_instance" "nat" {
 }
 
 resource "aws_route" "private_nat_ec2" {
-  count = var.enable_nat_gateway && var.nat_as_ec2_instance ? local.ec2_nat_count : 0
+  count = var.create_vpc && var.enable_nat_gateway && var.nat_as_ec2_instance ? local.ec2_nat_count : 0
 
   route_table_id         = element(module.vpc.private_route_table_ids, count.index)
   destination_cidr_block = "0.0.0.0/0"
@@ -155,4 +159,3 @@ resource "aws_route" "private_nat_ec2" {
     create = "5m"
   }
 }
-

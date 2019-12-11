@@ -1,3 +1,9 @@
+variable "create_vpc" {
+  description = "Controls if VPC should be created (it affects almost all resources)"
+  type        = bool
+  default     = "true"
+}
+
 variable "create_route53_zone" {
   default     = "false"
   description = "Switch to create Route53 zone"
@@ -224,4 +230,3 @@ variable "database_outbound_acl_rules" {
     },
   ]
 }
-
