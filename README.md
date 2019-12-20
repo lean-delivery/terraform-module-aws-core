@@ -135,7 +135,11 @@ module "core" {
 
 ## Terraform versions
 
-Terraform version 0.11.11 or newer is required for this module to work.
+Terraform version 0.12.18 or newer is required for this module to work.
+
+## Go versions
+
+Go version go1.12.5 darwin/amd64
 
 ## Contributing
 
