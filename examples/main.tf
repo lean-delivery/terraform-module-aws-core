@@ -7,7 +7,6 @@ data "aws_caller_identity" "current" {}
 module "teratest_vpc" {
   source                  = "../"
   create_route53_zone     = "${var.create_route53_zone}"
-  root_domain             = "${var.root_domain}"
   project                 = "${var.project}"
   environment             = "${var.environment}"
   availability_zones      = "${var.availability_zones}"

@@ -13,13 +13,11 @@ variable "root_domain" {
 }
 
 variable "project" {
-  type        = "string"
   default     = "project"
   description = "Project name is used to identify resources"
 }
 
 variable "environment" {
-  type        = "string"
   default     = "env"
   description = "Environment name is used to identify resources"
 }
