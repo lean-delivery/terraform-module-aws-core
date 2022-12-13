@@ -45,11 +45,12 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "1.66.0"
 
-  name            = "${var.project}-${var.environment}"
-  azs             = "${var.availability_zones}"
-  cidr            = "${var.vpc_cidr}"
-  private_subnets = "${var.private_subnets}"
-  public_subnets  = "${var.public_subnets}"
+  name                  = "${var.project}-${var.environment}"
+  azs                   = "${var.availability_zones}"
+  cidr                  = "${var.vpc_cidr}"
+  secondary_cidr_blocks = "${var.vpc_secondary_cidr}"
+  private_subnets       = "${var.private_subnets}"
+  public_subnets        = "${var.public_subnets}"
 
   database_subnets       = "${var.database_subnets}"
   database_subnet_tags   = "${var.database_subnet_tags}"
@@ -60,7 +61,8 @@ module "vpc" {
 
   enable_nat_gateway      = "${ var.enable_nat_gateway ? "${ var.nat_as_ec2_instance ? "false" : "true" }" : "false" }"
   single_nat_gateway      = "${var.single_nat_gateway}"
-  map_public_ip_on_launch = "${var.map_public_ip_on_launch}"                                                            // true by default
+  map_public_ip_on_launch = "${var.map_public_ip_on_launch}"
+  // true by default
 
   enable_dns_support   = "${var.enable_dns_support}"
   enable_dns_hostnames = "${var.enable_dns_hostnames}"
