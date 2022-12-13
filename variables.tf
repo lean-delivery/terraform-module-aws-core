@@ -214,3 +214,8 @@ variable "database_outbound_acl_rules" {
     },
   ]
 }
+
+variable "vpc_secondary_cidr" {
+  default     = ["0.0.0.0/16"]
+  description = "The secondary CIDR blocks for the VPC. Default value is a valid CIDR, but not acceptable by AWS and should be overridden"
+}
